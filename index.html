@@ -1,0 +1,204 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEU Library</title>
+<link rel="stylesheet" href="expage.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="container1" id="loginCard">
+  <div class="card">
+    <div class="card-header">
+      <img src="https://upload.wikimedia.org/wikipedia/en/c/c6/New_Era_University.svg" 
+           style="width:70px; margin-bottom:10px;">
+      <h1 class="log">NEU Library</h1>
+      <p class="subtitle">Library Visitor Log App </p>
+
+      <div id="qrcode" style="margin:15px auto; display:flex; justify-content:center;"></div>
+
+      <div id="errorMsg" style="color:red; display:none;"></div>
+      <div id="successMsg" style="color:green; display:none;"></div>
+    </div>
+
+    <div class="card-content">
+
+      <!-- LOGIN FORM -->
+      <div id="signInForm">
+
+        <div class="form-group">
+          <label>Institutional Email</label>
+          <input type="email" id="loginEmail" placeholder="example@neu.edu.ph">
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <div style="position:relative;">
+            <input type="password" id="loginPassword">
+            <span onclick="togglePassword('loginPassword', this)" 
+                  style="position:absolute; right:15px; top:50%; transform:translateY(-50%); cursor:pointer;">
+              👁
+            </span>
+          </div>
+        </div>
+
+        <button type="button" onclick="handleLogin()">Sign In</button>
+
+        <div style="display:flex; align-items:center; margin:15px 0;">
+          <hr style="flex:1;">
+          <span style="padding:0 10px;">or</span>
+          <hr style="flex:1;">
+        </div>
+
+        <button type="button" onclick="handleGoogleLogin()" 
+          style="background:white; color:#374151; border:1px solid #e5e7eb;">
+          Sign in with Google
+        </button>
+
+        <p style="text-align:center; font-size:13px; margin-top:15px;">
+          Don't have an account? 
+          <a href="javascript:void(0)" onclick="toggleForm('register')">Register</a>
+        </p>
+
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div id="registerForm" style="display:none;">
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="regEmail" placeholder="example@neu.edu.ph">
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <div style="position:relative;">
+            <input type="password" id="regPassword">
+            <span onclick="togglePassword('regPassword', this)" 
+                  style="position:absolute; right:15px; top:50%; transform:translateY(-50%); cursor:pointer;">
+              👁
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <div style="position:relative;">
+            <input type="password" id="regConfirm">
+            <span onclick="togglePassword('regConfirm', this)" 
+                  style="position:absolute; right:15px; top:50%; transform:translateY(-50%); cursor:pointer;">
+              👁
+            </span>
+          </div>
+        </div>
+
+        <button type="button" onclick="handleRegister()">Register</button>
+
+        <p style="text-align:center; font-size:13px; margin-top:15px;">
+          Already have an account? 
+          <a href="javascript:void(0)" onclick="toggleForm('login')">Sign In</a>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- VISIT FORM -->
+<div class="container1" id="visitForm" style="display:none">
+
+  <div class="card">
+
+    <div class="card-header">
+      <h2 class="log">Library Check-In</h2>
+      <p class="subtitle">Fill out your visit details</p>
+    </div>
+
+    <div class="card-content">
+
+      <div class="form-group">
+        <label>Purpose of Visit</label>
+        <select id="purpose">
+          <option>Study</option>
+          <option>Research</option>
+          <option>Borrow/Return Books</option>
+          <option>Use Computer</option>
+          <option>Student Lounge</option>
+          <option>Printing</option>
+          <option>Panata</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Visitor Type</label>
+        <select id="visitorType">
+          <option value="student">Student</option>
+          <option value="employee">Employee</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>College</label>
+        <select id="college" onchange="updateCourses()">
+          <option value="">-- Select College --</option>
+          <option>College of Accountancy</option>
+          <option>College of Agriculture</option>
+          <option>College of Arts and Sciences</option>
+          <option>College of Business Administration</option>
+          <option>College of Communication</option>
+          <option>College of Informatics and Computing Studies</option>
+          <option>College of Criminology</option>
+          <option>College of Education</option>
+          <option>College of Engineering and Architecture</option>
+          <option>College of Medical Technology</option>
+          <option>College of Midwifery</option>
+          <option>College of Music</option>
+          <option>College of Nursing</option>
+          <option>College of Physical Therapy</option>
+          <option>College of Respiratory Therapy</option>
+          <option>School of International Relations</option>
+          <option>College of Law</option>
+          <option>College of Medicine</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Course / Program</label>
+        <select id="course"></select>
+      </div>
+
+      <button type="button" onclick="submitVisit()">Submit</button>
+      <button type="button" onclick="logout()" class="exit-btn">Exit</button>
+
+      <p class="welcome-text" id="successMessage" style="display:none;">
+        Welcome to NEU Library!
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+function togglePassword(inputId, el) {
+  const input = document.getElementById(inputId);
+  if (input.type === "password") {
+    input.type = "text";
+    el.textContent = "🙈";
+  } else {
+    input.type = "password";
+    el.textContent = "👁";
+  }
+}
+</script>
+
+<script type="module" src="expage.js"></script>
+
+</body>
+</html>
