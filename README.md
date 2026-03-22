@@ -24,6 +24,6 @@ A web-based NEU Library Visitor Log System that uses Firebase Authentication to 
 
 ## 🗄️ Database Structure
 The application uses Firebase Firestore with the following collections:
-users – Stores user account information (name, email, role)
-visitors – Main collection that stores visitor logs (name, college, purpose, type, date, time in/out)
-logs – Tracks system actions such as adding or updating visitor record
+- users – Stores user account information (name, email, role)
+- visitors – Main collection that stores visitor logs (name, college, purpose, type, date, time in/out)
+- logs – Tracks system actions such as adding or updating visitor record
