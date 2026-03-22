@@ -4,7 +4,7 @@ A web-based NEU Library Visitor Log System that uses Firebase Authentication to 
 ## 🌐 Live App Demo
 🔗 [neu-library-log-brry.vercel.app](https://neu-library-log-brry.vercel.app/)
 
-#Features
+## ⚙️ Features
 - User Authentication – Secure login and registration using Firebase (email/password or Google).
 - Visitor Logging – Record visitor details like name, purpose, college, and employee type.
 - Real-Time Database – Stores and syncs visitor data instantly using Firebase Firestore.
