@@ -1,9 +1,9 @@
 ## 🏛️ NEU Library Visitor Log System
 A web-based NEU Library Visitor Log System that uses Firebase Authentication to securely record visits and provides a dashboard for viewing and filtering visitor statistics.
 
-## 🌐 Live App Demo
+## 🌐 Live App 
 🔗 [https://neu-library-log-midterm-project.vercel.app/](https://neu-library-log-midterm-project.vercel.app/)
-## Login Credentials
+## Demo Account
 You can log in using Google Authentication or use the demo account below:
 - Email: admin@neu.edu.ph  
 - Password: neu123
