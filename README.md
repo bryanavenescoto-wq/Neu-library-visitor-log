@@ -28,7 +28,7 @@ The application uses Firebase Firestore with the following collections:
 - visitors – Main collection that stores visitor logs (name, college, purpose, type, date, time in/out)
 - logs – Tracks system actions such as adding or updating visitor record
 
-## Test Account Access
+## 👤 Test Account Access
 You can log in using Google Authentication or use the demo account below:
 - Email: admin@neu.edu.ph  
 - Password: neu123
