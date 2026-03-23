@@ -167,25 +167,25 @@ window.handleRegister = async function() {
   const password = document.getElementById("regPassword").value;
   const confirm = document.getElementById("regConfirm").value;
 
-  if (!email || !password || !confirm) {
-    showError("Complete all fields.");
-    return;
-  }
+if (!email || !password || !confirm) {
+  showError("Please complete all fields.");
+  return;
+}
 
-  if (!email.endsWith("@neu.edu.ph")) {
-    showError("⚠️ Authorized access only. Only NEU institutional email addresses are allowed.");
-    return;
-  }
+if (!email.endsWith("@neu.edu.ph")) {
+  showError("Authorized access only. Use your NEU institutional email.");
+  return;
+}
 
-  if (password.length < 6) {
-    showError("Password must be at least 6 characters.");
-    return;
-  }
+if (password.length < 6) {
+  showError("Password must be at least 6 characters long.");
+  return;
+}
 
-  if (password !== confirm) {
-    showError("Passwords do not match.");
-    return;
-  }
+if (password !== confirm) {
+  showError("Passwords do not match.");
+  return;
+}
 
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
