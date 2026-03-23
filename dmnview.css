@@ -6,12 +6,10 @@
 
 
 
-:root { 
+:root {  
   --sidebar-w: 256px;
 
- 
   --bg: linear-gradient(135deg, #0f172a, #1e293b, #334155);
-
 
   --glass: rgba(255, 255, 255, 0.08);
   --glass-strong: rgba(255, 255, 255, 0.15);
@@ -28,8 +26,11 @@
   --shadow: 0 8px 32px rgba(0,0,0,0.4);
 
   --radius: 14px;
-}
 
+  
+  --dropdown-bg: #0f172a;
+  --dropdown-hover: #1e293b;
+}
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
