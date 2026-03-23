@@ -31,3 +31,6 @@ The application uses Firebase Firestore with the following collections:
 You can log in using Google Authentication or use the demo account below:
 - Email: admin@neu.edu.ph  
 - Password: neu123
+
+##  📄 License
+© 2026 New Era University Library. All rights reserved.
