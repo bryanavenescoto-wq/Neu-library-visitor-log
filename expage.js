@@ -108,7 +108,7 @@ async function redirectUser(user) {
 
   let role = "user";
 
-  // 🔥 CREATE USER IF NOT EXIST
+  // CREATE USER IF NOT EXIST
   if (!snap.exists()) {
     if (ADMIN_EMAILS.includes(user.email)) {
       role = "admin";
@@ -211,7 +211,7 @@ window.handleGoogleLogin = async function() {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
 
-    // 🔥 BLOCK NON-NEU EMAIL
+    // BLOCK NON-NEU EMAIL
     if (!user.email.endsWith("@neu.edu.ph")) {
       alert("Only NEU institutional email is allowed.");
       await signOut(auth);
