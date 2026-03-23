@@ -37,14 +37,14 @@ const db = getFirestore(app);
 // ================= GOOGLE =================
 const provider = new GoogleAuthProvider();
 
-// 🔥 FORCE ACCOUNT SELECTION EVERY TIME
+//  ACCOUNT SELECTION EVERY TIME
 provider.setCustomParameters({
   prompt: "select_account"
 });
 
 // ================= ADMIN EMAILS =================
 const ADMIN_EMAILS = [
-  "bryanaven.escoto@neu.edu.ph",   // ✅ YOU (TEST ADMIN)
+  "bryanaven.escoto@neu.edu.ph",   // ✅ (ADMIN)
   "jcesperanza@neu.edu.ph"         // ✅ PROFESSOR
 ];
 
@@ -144,7 +144,8 @@ window.handleLogin = async function() {
   }
 
   if (!email.endsWith("@neu.edu.ph")) {
-    showError("Only NEU institutional email is allowed.");
+    showError("Authorized access only. 
+             Only NEU institutional email addresses are allowed");
     return;
   }
 
