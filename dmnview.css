@@ -555,15 +555,27 @@ tbody tr:hover td { background: #f8fafc; }
 
 
 
-.badge {
+/* TYPE BADGES (Student / Employee) */
+.type-badge {
   padding: 3px 10px;
-  border-radius: 99px;
+  border-radius: 999px;
   font-size: 11.5px;
   font-weight: 500;
-  background: #f1f5f9;
-  border: 1px solid var(--border);
   display: inline-block;
   white-space: nowrap;
+  border: 1px solid var(--border); 
+}
+
+/* STUDENT */
+.type-student {
+  background: var(--student-bg);
+  color: var(--student-text);
+}
+
+/* EMPLOYEE */
+.type-employee {
+  background: var(--employee-bg);
+  color: var(--employee-text);
 }
 
 
