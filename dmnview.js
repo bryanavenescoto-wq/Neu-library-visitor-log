@@ -83,8 +83,10 @@ async function loadVisits() {
   const querySnapshot = await getDocs(collection(db, "visits"));
   allVisits = [];
   querySnapshot.forEach((d) => {
-    
-    console.log("PURPOSE:", data.purposeOfVisit);
+
+  console.log("PURPOSE:", data.purposeOfVisit); 
+
+  const data = d.data(); 
     
     allVisits.push({
       name: data.name || "",
