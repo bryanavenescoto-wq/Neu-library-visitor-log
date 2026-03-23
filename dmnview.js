@@ -459,7 +459,12 @@ function renderLogTable(data) {
         <td>${log.department}</td>
         <td>${log.course}</td>
         <td><span class="badge">${log.purpose}</span></td>
-        <td><span class="badge ${log.visitorType === 'employee' ? 'badge-employee' : 'badge-active'}">${log.visitorType === 'employee' ? 'Employee' : 'Student'}</span></td>
+    
+ <td>
+  <span class="type-badge ${log.visitorType.toLowerCase() === 'employee' ? 'type-employee' : 'type-student'}">
+    ${log.visitorType.toLowerCase() === 'employee' ? 'Employee' : 'Student'}
+  </span>
+</td>
         <td style="color:#64748b">${new Date(log.timestamp).toLocaleString([], {month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit"})}</td>
       </tr>
     `).join("");
