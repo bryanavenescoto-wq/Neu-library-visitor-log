@@ -190,16 +190,12 @@ body {
 }
 
 
-/* ══════════════════════════════
-   TABS
-══════════════════════════════ */
+
 .main-tab-content { display: none; }
 .main-tab-content.active { display: block; }
 
 
-/* ══════════════════════════════
-   PAGE HEADER
-══════════════════════════════ */
+
 .page-header {
   display: flex;
   align-items: flex-start;
@@ -234,9 +230,7 @@ body {
 }
 
 
-/* ══════════════════════════════
-   CARDS
-══════════════════════════════ */
+
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -256,9 +250,7 @@ body {
 .card-header h3 { margin: 0; font-size: 15px; font-weight: 600; }
 
 
-/* ══════════════════════════════
-   STAT CARDS
-══════════════════════════════ */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -320,9 +312,7 @@ body {
 .red-text   { color: var(--red)   !important; }
 
 
-/* ══════════════════════════════
-   CHARTS
-══════════════════════════════ */
+
 .charts-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -334,9 +324,7 @@ body {
 .chart-container { padding: 16px; height: 300px; }
 
 
-/* ══════════════════════════════
-   QUICK STATS
-══════════════════════════════ */
+
 .quick-stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -357,9 +345,7 @@ body {
 .quick-stat-item .qs-pct { font-size: 11px; color: #94a3b8; }
 
 
-/* ══════════════════════════════
-   INNER TABS (Analytics)
-══════════════════════════════ */
+
 .tabs-header {
   display: flex;
   border-bottom: 1px solid var(--border);
@@ -394,9 +380,7 @@ body {
 .tab-content.active { display: block; }
 
 
-/* ══════════════════════════════
-   SEARCH BAR
-══════════════════════════════ */
+
 .search-bar { position: relative; }
 .search-bar i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); width: 16px; height: 16px; }
 .search-bar input {
@@ -415,14 +399,11 @@ body {
 .search-bar input::placeholder { color: var(--muted); }
 
 
-/* ══════════════════════════════
-   TABLES
-══════════════════════════════ */
+
 .table-wrapper { overflow-x: auto; }
 
 
 table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-
 
 thead th {
   background: var(--bg);
@@ -437,22 +418,16 @@ thead th {
   white-space: nowrap;
 }
 
-
 tbody td {
   padding: 13px 16px;
   border-bottom: 1px solid var(--border);
   color: var(--text);
 }
 
-
 tbody tr:last-child td { border-bottom: none; }
 tbody tr:hover td { background: #f8fafc; }
 .text-right { text-align: right; }
 
-
-/* ══════════════════════════════
-   SECTION HEADERS (User Mgmt)
-══════════════════════════════ */
 .section-header {
   display: flex;
   align-items: center;
@@ -463,11 +438,9 @@ tbody tr:hover td { background: #f8fafc; }
   padding: 8px 0;
 }
 
-
 .section-header i { width: 16px; height: 16px; }
 .green-header { color: var(--green); }
 .red-header   { color: var(--red); }
-
 
 .blocked-alert {
   background: var(--red-light);
@@ -482,13 +455,8 @@ tbody tr:hover td { background: #f8fafc; }
   margin-bottom: 10px;
 }
 
-
 .blocked-alert i { width: 15px; height: 15px; flex-shrink: 0; }
 
-
-/* ══════════════════════════════
-   INSIGHTS (Analytics)
-══════════════════════════════ */
 .insights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -496,12 +464,10 @@ tbody tr:hover td { background: #f8fafc; }
   margin-top: 16px;
 }
 
-
 .insight-card { border-radius: 8px; padding: 14px; }
 .insight-card h4 { font-size: 12px; font-weight: 600; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.3px; }
 .insight-card .insight-value { font-size: 1.4rem; font-weight: 700; margin: 0 0 4px; }
 .insight-card .insight-sub { font-size: 12px; margin: 0; }
-
 
 .insight-blue   { background: #eff6ff; }
 .insight-blue h4 { color: #1e40af; } .insight-blue .insight-value { color: var(--primary); } .insight-blue .insight-sub { color: #60a5fa; }
@@ -513,9 +479,6 @@ tbody tr:hover td { background: #f8fafc; }
 .insight-orange h4 { color: #7c2d12; } .insight-orange .insight-value { color: var(--orange); } .insight-orange .insight-sub { color: #fb923c; }
 
 
-/* ══════════════════════════════
-   PURPOSE BREAKDOWN
-══════════════════════════════ */
 .purpose-item { margin-bottom: 14px; }
 .purpose-item-header {
   display: flex;
@@ -528,9 +491,6 @@ tbody tr:hover td { background: #f8fafc; }
 .purpose-bar { height: 8px; border-radius: 99px; transition: width 0.4s ease; }
 
 
-/* ══════════════════════════════
-   PAGINATION
-══════════════════════════════ */
 .pagination-bar {
   display: flex;
   justify-content: space-between;
@@ -543,9 +503,7 @@ tbody tr:hover td { background: #f8fafc; }
   gap: 8px;
 }
 
-
 .pagination-btns { display: flex; gap: 4px; }
-
 
 .page-btn {
   padding: 5px 11px;
@@ -558,15 +516,12 @@ tbody tr:hover td { background: #f8fafc; }
   transition: all 0.15s;
 }
 
-
 .page-btn:hover { background: var(--bg); }
 .page-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
 
-/* ══════════════════════════════
-   BUTTONS
-══════════════════════════════ */
+
 .btn {
   padding: 7px 14px;
   border-radius: 7px;
@@ -589,9 +544,7 @@ tbody tr:hover td { background: #f8fafc; }
 .btn-success:hover { background: var(--green); color: #fff; }
 
 
-/* ══════════════════════════════
-   BADGES
-══════════════════════════════ */
+
 .badge {
   padding: 3px 10px;
   border-radius: 99px;
@@ -609,9 +562,7 @@ tbody tr:hover td { background: #f8fafc; }
 .badge-employee { background: var(--primary-light); color: var(--primary); border-color: #bfdbfe; }
 
 
-/* ══════════════════════════════
-   SELECT INPUT
-══════════════════════════════ */
+
 .select-input {
   padding: 8px 12px;
   border: 1px solid var(--border);
@@ -624,15 +575,9 @@ tbody tr:hover td { background: #f8fafc; }
   transition: border-color 0.15s;
 }
 
-
 .select-input:focus { outline: none; border-color: var(--primary); }
 
-
-/* ══════════════════════════════
-   MOBILE CARDS
-══════════════════════════════ */
 .desktop-table { display: none !important; }
-
 
 .log-card {
   border: 1px solid var(--border);
@@ -643,13 +588,11 @@ tbody tr:hover td { background: #f8fafc; }
   font-size: 13px;
 }
 
-
 .log-card .log-name  { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
 .log-card .log-email { color: var(--muted); font-size: 12px; margin-bottom: 8px; }
 .log-card .log-row   { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; flex-wrap: wrap; gap: 4px; }
 .log-card .log-dept  { font-size: 12px; color: var(--muted); }
 .log-card .log-time  { font-size: 12px; color: var(--muted); }
-
 
 .user-card {
   border: 1px solid var(--border);
@@ -664,16 +607,11 @@ tbody tr:hover td { background: #f8fafc; }
   gap: 8px;
 }
 
-
 .user-card .user-info { flex: 1; min-width: 0; }
 .user-card .user-name  { font-weight: 600; font-size: 14px; }
 .user-card .user-email { color: var(--muted); font-size: 12px; word-break: break-all; }
 .user-card .user-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 
-
-/* ══════════════════════════════
-   HAMBURGER & COLLAPSED SIDEBAR
-══════════════════════════════ */
 .hamburger {
   margin-left: auto;
   background: none;
@@ -689,16 +627,12 @@ tbody tr:hover td { background: #f8fafc; }
   flex-shrink: 0;
 }
 
-
 .hamburger:hover { background: var(--bg); color: var(--text); }
 .hamburger i { width: 20px; height: 20px; }
 
-
-/* Collapsed state */
 .sidebar.collapsed {
   width: 60px;
 }
-
 
 .sidebar.collapsed .sidebar-brand-text,
 .sidebar.collapsed .nav-item span,
@@ -706,28 +640,23 @@ tbody tr:hover td { background: #f8fafc; }
   display: none;
 }
 
-
 .sidebar.collapsed .sidebar-brand {
   justify-content: center;
   padding: 14px 8px;
 }
 
-
 .sidebar.collapsed .sidebar-logo {
   display: none;
 }
-
 
 .sidebar.collapsed .hamburger {
   margin-left: 0;
 }
 
-
 .sidebar.collapsed .nav-item {
   justify-content: center;
   padding: 12px 8px;
 }
-
 
 .sidebar.collapsed .logout-btn {
   justify-content: center;
@@ -739,16 +668,11 @@ tbody tr:hover td { background: #f8fafc; }
   margin-left: 60px;
 }
 
-
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
 @media (max-width: 1024px) {
   .charts-grid { grid-template-columns: 1fr; }
 }
 
 
-/* Sidebar overlay backdrop (used on mobile) */
 .sidebar-overlay {
   display: none;
   position: fixed;
@@ -760,7 +684,7 @@ tbody tr:hover td { background: #f8fafc; }
 
 
 @media (max-width: 600px) {
-  /* On small screens sidebar is hidden off-screen by default */
+ 
   .sidebar {
     left: calc(-1 * var(--sidebar-w));
     width: var(--sidebar-w);
@@ -768,14 +692,12 @@ tbody tr:hover td { background: #f8fafc; }
   }
 
 
-  /* Slide in when mobile-open */
   .sidebar.mobile-open {
     left: 0;
     box-shadow: 4px 0 24px rgba(0,0,0,0.18);
     z-index: 300;
   }
-
-
+  
   .main-content {
     margin-left: 0 !important;
     padding: 16px;
@@ -787,7 +709,6 @@ tbody tr:hover td { background: #f8fafc; }
   .filters-row { width: 100%; }
   .select-input { flex: 1; min-width: 120px; }
 }
-
 
 @media (max-width: 480px) {
   .stats-grid { grid-template-columns: 1fr; }
