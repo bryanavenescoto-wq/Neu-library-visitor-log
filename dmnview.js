@@ -84,9 +84,10 @@ async function loadVisits() {
   allVisits = [];
   querySnapshot.forEach((d) => {
 
+  const data = d.data();
+
   console.log("PURPOSE:", data.purposeOfVisit); 
 
-  const data = d.data(); 
     
     allVisits.push({
       name: data.name || "",
