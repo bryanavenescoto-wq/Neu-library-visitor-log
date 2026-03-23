@@ -82,29 +82,33 @@ let isAdmin = ADMIN_LIST.includes(user.email.toLowerCase());
 async function loadVisits() {
   const querySnapshot = await getDocs(collection(db, "visits"));
   allVisits = [];
-querySnapshot.forEach((d) => {
 
-  const data = d.data();
+  querySnapshot.forEach((d) => {
+    const data = d.data();
 
+    console.log("PURPOSE:", data.purposeOfVisit || data.purpose || "Unknown");
 
-  console.log("PURPOSE:", data.purposeOfVisit || data.purpose || "Unknown");
-
-  allVisits.push({
-    name: data.name || "",
-    email: data.email || "",
-    department: data.college || "",
-    course: data.course || "N/A",
-
-   
-    purpose: data.purposeOfVisit || data.purpose || "Unknown",
-
-    visitorType: data.visitorType || "student",
-    timestamp: data.timestamp?.toDate 
-      ? data.timestamp.toDate() 
-      : new Date(data.timestamp)
+    allVisits.push({
+      name: data.name || "",
+      email: data.email || "",
+      department: data.college || "",
+      course: data.course || "N/A",
+      purpose: data.purposeOfVisit || data.purpose || "Unknown",
+      visitorType: data.visitorType || "student",
+      timestamp: data.timestamp?.toDate
+        ? data.timestamp.toDate()
+        : new Date(data.timestamp)
+    });
   });
 
-});
+  allVisits.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  filteredVisits = [...allVisits];
+
+  renderDashboard(allVisits);
+  renderLogTable(filteredVisits);
+  renderUsers();
+  renderAnalytics(allVisits);
+}
 
 
 // ── SIDEBAR / MAIN TAB SWITCH ──
