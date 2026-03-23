@@ -122,7 +122,7 @@ async function redirectUser(user) {
     role = snap.data().role;
   }
 
-  // 🔥 ADMIN REDIRECT
+  // ADMIN REDIRECT
   if (role === "admin") {
     window.location.href = "admin.html";
     return;
@@ -173,7 +173,7 @@ window.handleRegister = async function() {
   }
 
   if (!email.endsWith("@neu.edu.ph")) {
-    showError("Only NEU institutional email is allowed.");
+    showError("⚠️ Authorized access only. Only NEU institutional email addresses are allowed.");
     return;
   }
 
@@ -197,7 +197,7 @@ window.handleRegister = async function() {
       role: role
     });
 
-    showSuccess("Account created! You can now login.");
+    showSuccess("Account created🎉 You can now login.");
     toggleForm("login");
 
   } catch (err) {
