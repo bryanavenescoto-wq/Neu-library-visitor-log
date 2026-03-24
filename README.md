@@ -2,7 +2,7 @@
 A web-based NEU Library Visitor Log System that uses Firebase Authentication to securely record visits and provides a dashboard for viewing and filtering visitor statistics.
 
 ## 🌐 Live App 
-🔗 [NEU Library Visitor Log System Link](https://neu-library-visitor-log-j5az.vercel.app/)
+🔗 [NEU Library Visitor Log System Link](https://neu-library-visitor-log-school-proj.vercel.app/)
 ## ⚙️TechStack
 - HTML
 - CSS
