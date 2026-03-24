@@ -1,163 +1,106 @@
-// ================= FIREBASE IMPORTS =================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-
-import {
-  getAuth,
+import { 
+  getAuth, 
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  updateProfile,
+  signOut,
   GoogleAuthProvider,
-  signInWithPopup,
-  signOut
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
+import { 
+  getFirestore, 
+  addDoc, 
+  collection, 
+  doc, 
   getDoc,
-  setDoc,
-  addDoc,
-  collection
+  setDoc
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
-// ================= CONFIG =================
+// 🔥 FIREBASE CONFIG
 const firebaseConfig = {
-  apiKey: "AIzaSyBhxtyqtmBg7SmYdM5D980fEr9M1K-nEzY",
+  apiKey: "YOUR_KEY",
   authDomain: "library-system-6138b.firebaseapp.com",
   projectId: "library-system-6138b",
-  storageBucket: "library-system-6138b.appspot.com",
+  storageBucket: "library-system-6138b.firebasestorage.com",
   messagingSenderId: "250954766995",
   appId: "1:250954766995:web:040fe704019239a3ef4b66"
 };
 
-// ================= INIT =================
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
-// ================= GOOGLE =================
-const provider = new GoogleAuthProvider();
-
-//  ACCOUNT SELECTION EVERY TIME
-provider.setCustomParameters({
-  prompt: "select_account"
-});
-
-// ================= ADMIN EMAILS =================
-const ADMIN_EMAILS = [
-  "bryanaven.escoto@neu.edu.ph",   // ✅ (ADMIN)
-  "jcesperanza@neu.edu.ph"         // ✅ PROFESSOR
-];
+const googleProvider = new GoogleAuthProvider();
 
 let currentUser = null;
 
 // ================= UI HELPERS =================
 function showError(msg) {
-  const e = document.getElementById("errorMsg");
-  const s = document.getElementById("successMsg");
-
-  if (e) {
-    e.innerText = msg;
-    e.style.display = "block";
-  }
-  if (s) s.style.display = "none";
+  document.getElementById("errorMsg").innerText = msg;
+  document.getElementById("errorMsg").style.display = "block";
+  document.getElementById("successMsg").style.display = "none";
 }
 
 function showSuccess(msg) {
-  const e = document.getElementById("errorMsg");
-  const s = document.getElementById("successMsg");
-
-  if (s) {
-    s.innerText = msg;
-    s.style.display = "block";
-  }
-  if (e) e.style.display = "none";
+  document.getElementById("successMsg").innerText = msg;
+  document.getElementById("successMsg").style.display = "block";
+  document.getElementById("errorMsg").style.display = "none";
 }
 
-// ================= FRIENDLY ERRORS =================
-function getFriendlyError(code) {
-  switch (code) {
-    case "auth/invalid-credential":
-      return "Invalid email or password.";
-    case "auth/user-not-found":
-      return "Account not found.";
-    case "auth/wrong-password":
-      return "Incorrect password.";
-    case "auth/email-already-in-use":
-      return "Email already registered.";
-    default:
-      return "Something went wrong. Try again.";
-  }
-}
-
-// ================= FORM SWITCH =================
+// ================= TOGGLE =================
 window.toggleForm = function(type) {
   document.getElementById("errorMsg").style.display = "none";
   document.getElementById("successMsg").style.display = "none";
 
-  document.getElementById("signInForm").style.display =
-    type === "login" ? "block" : "none";
-
-  document.getElementById("registerForm").style.display =
-    type === "register" ? "block" : "none";
-};
-
-// ================= REDIRECT LOGIC =================
-async function redirectUser(user) {
-  const userRef = doc(db, "users", user.uid);
-  const snap = await getDoc(userRef);
-
-  let role = "user";
-
-  // CREATE USER IF NOT EXIST
-  if (!snap.exists()) {
-    if (ADMIN_EMAILS.includes(user.email)) {
-      role = "admin";
-    }
-
-    await setDoc(userRef, {
-      email: user.email,
-      role: role
-    });
+  if (type === "register") {
+    document.getElementById("signInForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "block";
   } else {
-    role = snap.data().role;
+    document.getElementById("registerForm").style.display = "none";
+    document.getElementById("signInForm").style.display = "block";
   }
-
-  // ADMIN REDIRECT
-  if (role === "admin") {
-    window.location.href = "admin.html";
-    return;
-  }
-
-  // 👤 NORMAL USER
-  document.getElementById("loginCard").style.display = "none";
-  document.getElementById("visitForm").style.display = "block";
-}
+};
 
 // ================= LOGIN =================
 window.handleLogin = async function() {
   const email = document.getElementById("loginEmail").value.trim();
   const password = document.getElementById("loginPassword").value;
-
-  if (!email || !password) {
-    showError("Please fill in all fields.");
-    return;
-  }
+  const enteredName = document.getElementById("loginName").value.trim();
 
   if (!email.endsWith("@neu.edu.ph")) {
-    showError("Authorized access only. 
-             Only NEU institutional email addresses are allowed");
+    showError("Use your institutional email.");
     return;
   }
 
   try {
-    const res = await signInWithEmailAndPassword(auth, email, password);
-    currentUser = res.user;
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    currentUser = result.user;
 
-    await redirectUser(currentUser);
+    if (enteredName) {
+      await updateProfile(currentUser, { displayName: enteredName });
+    }
+
+    // 🔥 GET USER ROLE
+    const userRef = doc(db, "users", currentUser.uid);
+    const snap = await getDoc(userRef);
+
+    if (!snap.exists()) {
+      showError("User data not found. Contact admin.");
+      return;
+    }
+
+    const role = snap.data().role;
+
+    if (role === "admin") {
+      window.location.href = "admin.html";
+    } else {
+      document.getElementById("loginCard").style.display = "none";
+      document.getElementById("visitForm").style.display = "block";
+    }
 
   } catch (err) {
     console.error(err);
-    showError(getFriendlyError(err.code));
+    showError(err.message);
   }
 };
 
@@ -167,88 +110,82 @@ window.handleRegister = async function() {
   const password = document.getElementById("regPassword").value;
   const confirm = document.getElementById("regConfirm").value;
 
-if (!email || !password || !confirm) {
-  showError("Please complete all fields.");
-  return;
-}
+  if (!email.endsWith("@neu.edu.ph")) {
+    showError("Use your institutional email.");
+    return;
+  }
 
-if (!email.endsWith("@neu.edu.ph")) {
-  showError("Authorized access only. Use your NEU institutional email.");
-  return;
-}
+  if (password.length < 6) {
+    showError("Password must be at least 6 characters.");
+    return;
+  }
 
-if (password.length < 6) {
-  showError("Password must be at least 6 characters long.");
-  return;
-}
-
-if (password !== confirm) {
-  showError("Passwords do not match.");
-  return;
-}
+  if (password !== confirm) {
+    showError("Passwords do not match.");
+    return;
+  }
 
   try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const result = await createUserWithEmailAndPassword(auth, email, password);
 
-    let role = ADMIN_EMAILS.includes(email) ? "admin" : "user";
-
-    await setDoc(doc(db, "users", res.user.uid), {
+    // 🔥 SAVE USER IN FIRESTORE
+    await setDoc(doc(db, "users", result.user.uid), {
       email: email,
-      role: role
+      role: "user" // default role
     });
 
-    showSuccess("Account created🎉 You can now login.");
+    showSuccess("Account created! Please login.");
     toggleForm("login");
 
   } catch (err) {
     console.error(err);
-    showError(getFriendlyError(err.code));
+    showError(err.message);
   }
 };
 
 // ================= GOOGLE LOGIN =================
 window.handleGoogleLogin = async function() {
   try {
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
+    const result = await signInWithPopup(auth, googleProvider);
 
-    // BLOCK NON-NEU EMAIL
-    if (!user.email.endsWith("@neu.edu.ph")) {
-      alert("Only NEU institutional email is allowed.");
+    if (!result.user.email.endsWith("@neu.edu.ph")) {
+      showError("Use institutional email.");
       await signOut(auth);
       return;
     }
 
-    currentUser = user;
+    currentUser = result.user;
 
-    await redirectUser(user);
+    const ref = doc(db, "users", currentUser.uid);
+    const snap = await getDoc(ref);
+
+    if (!snap.exists()) {
+      await setDoc(ref, {
+        email: currentUser.email,
+        role: "user"
+      });
+    }
+
+    document.getElementById("loginCard").style.display = "none";
+    document.getElementById("visitForm").style.display = "block";
 
   } catch (err) {
-    console.error(err);
-    showError(getFriendlyError(err.code));
+    showError(err.message);
   }
 };
 
-// ================= VISIT LOG =================
+// ================= VISIT =================
 window.submitVisit = async function() {
   if (!currentUser) {
-    alert("Please login first.");
+    alert("Login first!");
     return;
   }
-
-  const purpose = document.getElementById("purpose").value;
-  const type = document.getElementById("visitorType").value;
-  const college = document.getElementById("college").value;
-  const course = document.getElementById("course").value;
 
   try {
     await addDoc(collection(db, "visits"), {
       email: currentUser.email,
-      purpose: purpose,
-      type: type,
-      college: college,
-      course: course,
-      time: new Date().toLocaleString()
+      name: currentUser.displayName || "No Name",
+      timestamp: new Date()
     });
 
     document.getElementById("successMessage").style.display = "block";
@@ -256,10 +193,4 @@ window.submitVisit = async function() {
   } catch (err) {
     alert(err.message);
   }
-};
-
-// ================= LOGOUT =================
-window.logout = async function() {
-  await signOut(auth);
-  location.reload();
 };
